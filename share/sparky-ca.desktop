@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=PJeOffice CA Certificates Installer
+Name[pl_PL]=Instalator Certyfikatów PJeOffice CA
+Name[pt_BR]=PJeOffice - Instalador de Certificados CA
+GenericName=PJeOffice - Instalador de Certificados CA
+Comment=PJeOffice CA Certificates Installer
+Comment[pl_PL]=Instalator Certyfikatów PJeOffice CA
+Comment[pt_BR]=PJeOffice - Instalador de Certificados CA
+Exec=/usr/bin/sparky-ca
+Icon=seahorse
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Applications;Utility;
