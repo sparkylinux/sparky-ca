@@ -1,10 +1,9 @@
 #!/bin/bash
 #
-#  Created by Paweł "pavroo" Pijanowski 2018/02/17
-#  Copyright 2018 under the GNU GPL2 License
-#  Last update 2018/02/19
-#
-#  This script requires yad to run
+# Created by Paweł "pavroo" Pijanowski 2018/02/17
+# Copyright 2018 under the GNU GPL2 License
+# This script requires yad to run
+# Last update 2018/03/29
 
 # get default's locale file
 DEFLOCDIR="/usr/share/sparky/sparky-ca"
@@ -18,7 +17,7 @@ fi
 
 testroot="`whoami`"
 if [ "$testroot" != "root" ]; then
-    echo "Must be root...Exiting"
+    echo "Must be root... Exiting..."
     exit 1
 fi
 
@@ -31,13 +30,12 @@ OKEXIT="--button=Ok:0 --button=$LOCAL3:1"
 YESNO="--button=$LOCAL13:0 --button=$LOCAL14:1"
 MSGBOX="--button=Ok:0"
 TITLETEXT="$LOCAL4"
-
-if [ -f /usr/bin/sparky-terminal ]; then
-	SPARKYXTERM="sparky-terminal"
+if [ -f /usr/bin/sparky-xterm ];then
+	SPARKYXTERM="/usr/bin/sparky-xterm"
 else
-	SPARKYXTERM="x-terminal-emulator"
+	echo "sparky-xterm is missing... Exiting..."
+	exit 1
 fi
-
 CADIR="/usr/local/share/ca-certificates"
 CABRDIR="ICP-Brazil"
 if [ ! -d $CADIR/$CABRDIR ]; then
@@ -103,33 +101,33 @@ if [ -f $BRCA1 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA1 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA1
-		$SPARKYXTERM -e "wget $BRSERVER1/$BRCA1"
+		$SPARKYXTERM "wget $BRSERVER1/$BRCA1"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER1/$BRCA1"
+	$SPARKYXTERM "wget $BRSERVER1/$BRCA1"
 fi
 
 if [ -f $BRCA2 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA2 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA2
-		$SPARKYXTERM -e "wget $BRSERVER1/$BRCA2"
+		$SPARKYXTERM "wget $BRSERVER1/$BRCA2"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER1/$BRCA2"
+	$SPARKYXTERM "wget $BRSERVER1/$BRCA2"
 fi
 
 if [ -f $BRCA3 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA3 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA3
-		$SPARKYXTERM -e "wget $BRSERVER1/$BRCA3"
+		$SPARKYXTERM "wget $BRSERVER1/$BRCA3"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER1/$BRCA3"
+	$SPARKYXTERM "wget $BRSERVER1/$BRCA3"
 fi
 
-$SPARKYXTERM -e "update-ca-certificates"
+$SPARKYXTERM "update-ca-certificates"
 
 if [ -f $BRCA1 ]; then
 	BRCA1CHECK=$BRCA1
@@ -156,33 +154,33 @@ if [ -f $BRCA4 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA4 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA4
-		$SPARKYXTERM -e "wget $BRSERVER2/v1/p/$BRCA4"
+		$SPARKYXTERM "wget $BRSERVER2/v1/p/$BRCA4"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER2/v1/p/$BRCA4"
+	$SPARKYXTERM "wget $BRSERVER2/v1/p/$BRCA4"
 fi
 
 if [ -f $BRCA5 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA5 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA5
-		$SPARKYXTERM -e "wget $BRSERVER2/v2/p/$BRCA5"
+		$SPARKYXTERM "wget $BRSERVER2/v2/p/$BRCA5"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER2/v2/p/$BRCA5"
+	$SPARKYXTERM "wget $BRSERVER2/v2/p/$BRCA5"
 fi
 
 if [ -f $BRCA6 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA6 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA6
-		$SPARKYXTERM -e "wget $BRSERVER2/v5/p/$BRCA6"
+		$SPARKYXTERM "wget $BRSERVER2/v5/p/$BRCA6"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER2/v5/p/$BRCA6"
+	$SPARKYXTERM "wget $BRSERVER2/v5/p/$BRCA6"
 fi
 
-$SPARKYXTERM -e "update-ca-certificates"
+$SPARKYXTERM "update-ca-certificates"
 
 if [ -f $BRCA4 ]; then
 	BRCA4CHECK=$BRCA4
@@ -209,23 +207,23 @@ if [ -f $BRCA7 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA7 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA7
-		$SPARKYXTERM -e "wget $BRSERVER3/v2/$BRCA7"
+		$SPARKYXTERM "wget $BRSERVER3/v2/$BRCA7"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER3/v2/$BRCA7"
+	$SPARKYXTERM "wget $BRSERVER3/v2/$BRCA7"
 fi
 
 if [ -f $BRCA8 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA8 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA8
-		$SPARKYXTERM -e "wget $BRSERVER3/v5/$BRCA8"
+		$SPARKYXTERM "wget $BRSERVER3/v5/$BRCA8"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER3/v5/$BRCA8"
+	$SPARKYXTERM "wget $BRSERVER3/v5/$BRCA8"
 fi
 
-$SPARKYXTERM -e "update-ca-certificates"
+$SPARKYXTERM "update-ca-certificates"
 
 if [ -f $BRCA7 ]; then
 	BRCA7CHECK=$BRCA7
@@ -247,33 +245,33 @@ if [ -f $BRCA9 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA9 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA9
-		$SPARKYXTERM -e "wget $BRSERVER4/v1/p/$BRCA9"
+		$SPARKYXTERM "wget $BRSERVER4/v1/p/$BRCA9"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER4/v1/p/$BRCA9"
+	$SPARKYXTERM "wget $BRSERVER4/v1/p/$BRCA9"
 fi
 
 if [ -f $BRCA2 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA10 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA10
-		$SPARKYXTERM -e "wget $BRSERVER4/v1/p/$BRCA10"
+		$SPARKYXTERM "wget $BRSERVER4/v1/p/$BRCA10"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER4/v1/p/$BRCA10"
+	$SPARKYXTERM "wget $BRSERVER4/v1/p/$BRCA10"
 fi
 
 if [ -f $BRCA3 ]; then
 	$DIALOG4 $TITLE"$TITLETEXT" $YESNO $TEXT"\n$BRCA11 $LOCAL11\n$LOCAL12"
 	if [ "$?" = "0" ]; then
 		rm -f $BRCA11
-		$SPARKYXTERM -e "wget $BRSERVER4/v1/p/$BRCA11"
+		$SPARKYXTERM "wget $BRSERVER4/v1/p/$BRCA11"
 	fi
 else
-	$SPARKYXTERM -e "wget $BRSERVER4/v1/p/$BRCA11"
+	$SPARKYXTERM "wget $BRSERVER4/v1/p/$BRCA11"
 fi
 
-$SPARKYXTERM -e "update-ca-certificates"
+$SPARKYXTERM "update-ca-certificates"
 
 if [ -f $BRCA9 ]; then
 	BRCA9CHECK=$BRCA9
